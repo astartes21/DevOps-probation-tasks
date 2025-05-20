@@ -1,0 +1,25 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include mime.types;
+  default_type application/octet-stream;
+
+  sendfile on;
+  keepalive_timeout 65;
+
+  server {
+    listen {{ nginx_listen_port }};
+    server_name {{ nginx_server_name }};
+
+    location / {
+      root /var/www/html;
+      index index.html index.htm;
+    }
+  }
+}

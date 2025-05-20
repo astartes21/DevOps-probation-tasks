@@ -1,0 +1,29 @@
+---
+- name: Install nginx package
+  apt:
+    name: "{{ nginx_package }}"
+    state: present
+    update_cache: yes
+
+- name: Deploy nginx.conf from template
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: Reload nginx
+
+- name: Ensure nginx is started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Wait for nginx to respond on port
+  wait_for:
+    port: "{{ nginx_listen_port }}"
+    host: 127.0.0.1
+    timeout: 30
+
+- name: Validate HTTP response
+  uri:
+    url: "http://127.0.0.1:{{ nginx_listen_port }}"
+    status_code: 200

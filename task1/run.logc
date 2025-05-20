@@ -1,0 +1,24 @@
+
+PLAY [Configure Nginx web server] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [nginx : Install nginx package] *******************************************
+ok: [localhost]
+
+TASK [nginx : Deploy nginx.conf from template] *********************************
+ok: [localhost]
+
+TASK [nginx : Ensure nginx is started and enabled] *****************************
+ok: [localhost]
+
+TASK [nginx : Wait for nginx to respond on port] *******************************
+ok: [localhost]
+
+TASK [nginx : Validate HTTP response] ******************************************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
